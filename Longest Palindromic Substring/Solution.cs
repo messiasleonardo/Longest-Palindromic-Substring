@@ -8,68 +8,37 @@ namespace Longest_Palindromic_Substring
 {
     public class Solution
     {
+        int start = 0;
+        int lenght = 0;
         public string LongestPalindrome(string s)
         {
-            char[] convertString = s.ToArray();
-            string invertString = "";
-            for (int i = convertString.Length - 1; i >= 0; i--)
+            if (s == null || s.Length <= 1)
             {
-                invertString += $"{convertString[i]}";
+                return s;
             }
 
-            string logeststring = "";
-            int count = 0;
-            int totalString = 0;
-            string result = "";
 
-
-
-            char[] invertStringArray = invertString.ToArray();
-
-            for (int i = 0; i <= invertString.Length - 1; i++)
+            for (int i = 0; i < s.Length; i++)
             {
-                for (int x = 0; x <= invertString.Length - 1; x++)
-                {
-                    if (invertStringArray[i] == convertString[x])
-                    {
-                        for (int z = i, a = x; z <= invertString.Length - 1; z++, a++)
-                        {
-                            if (z > invertString.Length - 1 || a > invertString.Length - 1)
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                if (invertStringArray[z] == convertString[a])
-                                {
-                                    count++;
-                                    logeststring += $"{invertStringArray[z]}";
-                                }
-                                else
-                                {
-                                    count = 0;
-                                    logeststring = "";
-                                }
-                                if (count > totalString)
-                                {
-                                    result = logeststring;
-                                    totalString = count;
-
-                                }
-                            }
-                        }
-                        logeststring = "";
-                        count = 0;
-                    }
-                }
-
+                ExpandFromMiddle(s, i, i);
+                ExpandFromMiddle(s, i, i + 1);
             }
-
-            return result;
-
-
+            return s.Substring(start, start + lenght);
         }
 
-        
+
+        private void ExpandFromMiddle(string s, int i, int j)
+        {
+            while (i >= 0 && j < s.Length && s[i].Equals(s[j]))
+            {
+                i--;
+                j++;
+            }
+            if (j - i - 1 > lenght)
+            {
+                lenght = j - i - 1;
+                start = i + 1;
+            }
+        }
     }
 }

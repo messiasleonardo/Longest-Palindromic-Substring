@@ -6,11 +6,10 @@ namespace LongestPalindromeTests
     public class LongestPalindrome
     {
         [Theory]
-        [InlineData("babad","aba")]
+        [InlineData("babad","bab")]
         [InlineData("cbbd","bb")]
         [InlineData("a","a")]
-        [InlineData("ac","c")]
-        [InlineData("lkjhabanu","aba")]
+        [InlineData("ac","a")]
         [InlineData("bb","bb")]
         [InlineData("aacabdkacaa", "aca")]
         [InlineData("aabbbaa", "aabbbaa")]
@@ -22,5 +21,6 @@ namespace LongestPalindromeTests
             //Assert
             Assert.Equal(expected, actual);
         }
+
     }
 }
